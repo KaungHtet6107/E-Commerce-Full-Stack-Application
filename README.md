@@ -51,16 +51,12 @@ Frontend: https://sb-ecommerce-kaung-htet.netlify.app/
 Backend API: https://sb-ecom-latest-8807.onrender.com
 ---
 🛠️ Build & Run
-
 Backend
 ./mvnw clean package -DskipTests
 java -jar target/sb-ecom-0.0.1-SNAPSHOT.jar
-
 
 Frontend
 npm install
 npm run build
 npm run dev
-```
-
 ---
