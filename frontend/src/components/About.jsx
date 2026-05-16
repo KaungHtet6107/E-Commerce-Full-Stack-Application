@@ -2,7 +2,7 @@ import ProductCard from "./shared/ProductCard";
 
 const products = [
     {
-        image: "https://embarkx.com/sample/placeholder.png",
+        image: "https://github.com/KaungHtet6107/E-Commerce-Full-Stack-Application/blob/main/frontend/public/iPhone17ProMax.png",
         productName: "iPhone 17 Pro Max",
         description:
           "The iPhone 17 Pro Max offers exceptional performance with its A19 Pro chip, stunning Super Retina XDR display, and advanced camera features for breathtaking photos.",
@@ -10,7 +10,7 @@ const products = [
         price: 1500,
       },
       {
-        image: "https://embarkx.com/sample/placeholder.png",
+        image: "https://github.com/KaungHtet6107/E-Commerce-Full-Stack-Application/blob/main/frontend/public/SamsungGalaxyS21.png",
         productName: "Samsung Galaxy S21",
         description:
           "Experience the brilliance of the Samsung Galaxy S21 with its vibrant AMOLED display, powerful camera, and sleek design that fits perfectly in your hand.",
@@ -18,7 +18,7 @@ const products = [
         price: 900,
       },
       {
-        image: "https://embarkx.com/sample/placeholder.png",
+        image: "https://github.com/KaungHtet6107/E-Commerce-Full-Stack-Application/blob/main/frontend/public/GooglePixel6.png",
         productName: "Google Pixel 6",
         description:
           "The Google Pixel 6 boasts cutting-edge AI features, exceptional photo quality, and a stunning display, making it a perfect choice for Android enthusiasts.",
@@ -45,7 +45,7 @@ const About = () => {
 
                 <div className="w-full md:w-1/2 mb-6 md:mb-0">
                     <img
-                        src="https://embarkx.com/sample/placeholder.png"
+                        src="https://github.com/KaungHtet6107/E-Commerce-Full-Stack-Application/blob/main/frontend/public/E-commerce.png"
                         alt="About Us"
                         className="w-full h-auto rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105"></img>
                 </div>
