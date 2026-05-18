@@ -63,13 +63,13 @@ const ImageUploadForm = ({ setOpen, product }) => {
             .from("products-images")
             .getPublicUrl(fileName);
 
-        const imageUrl = data.publicUrl;
+        const image = data.publicUrl;
 
         // send URL to backend
         dispatch(
             updateProductImageFromDashboard(
                 {
-                    imageUrl
+                    image
                 },
                 product.id,
                 toast,
