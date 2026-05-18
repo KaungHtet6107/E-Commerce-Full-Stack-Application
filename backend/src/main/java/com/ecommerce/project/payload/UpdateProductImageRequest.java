@@ -2,13 +2,13 @@ package com.ecommerce.project.payload;
 
 public class UpdateProductImageRequest {
 
-    private String imageUrl;
+    private String image;
 
     public String getImageUrl() {
-        return imageUrl;
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageUrl(String image) {
+        this.image = image;
     }
 }
