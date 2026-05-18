@@ -5,6 +5,7 @@ import { Button } from '@mui/material';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProductImageFromDashboard } from '../../../store/actions';
+import { supabase } from "../../../lib/supabase";
 
 const ImageUploadForm = ({ setOpen, product }) => {
     const [loader, setLoader] = useState(false);
@@ -34,17 +35,56 @@ const ImageUploadForm = ({ setOpen, product }) => {
     };
 
     const addNewImageHandler = async (event) => {
-        event.preventDefault();
-        if (!selectedFile) {
-            toast.error("Please select an image before saving.");
-            return;
+    event.preventDefault();
+
+    if (!selectedFile) {
+        toast.error("Please select an image.");
+        return;
+    }
+
+    try {
+        setLoader(true);
+
+        // unique filename
+        const fileName =
+            `${Date.now()}-${selectedFile.name}`;
+
+        // upload to supabase
+        const { error } = await supabase.storage
+            .from("products")
+            .upload(fileName, selectedFile);
+
+        if (error) {
+            throw error;
         }
 
-        const formData = new FormData();
-        formData.append("image", selectedFile);
+        // get public URL
+        const { data } = supabase.storage
+            .from("products")
+            .getPublicUrl(fileName);
 
-        dispatch(updateProductImageFromDashboard(formData, product.id, toast, setLoader, setOpen, isAdmin));
-    };
+        const imageUrl = data.publicUrl;
+
+        // send URL to backend
+        dispatch(
+            updateProductImageFromDashboard(
+                {
+                    imageUrl
+                },
+                product.id,
+                toast,
+                setLoader,
+                setOpen,
+                isAdmin
+            )
+        );
+
+    } catch (error) {
+        console.error(error);
+        toast.error("Image upload failed");
+        setLoader(false);
+    }
+};
 
     const handleClearImage = () => {
         setPreviewImage(null);
