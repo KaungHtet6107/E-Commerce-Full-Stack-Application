@@ -51,7 +51,7 @@ const ImageUploadForm = ({ setOpen, product }) => {
 
         // upload to supabase
         const { error } = await supabase.storage
-            .from("products")
+            .from("products-images")
             .upload(fileName, selectedFile);
 
         if (error) {
@@ -60,7 +60,7 @@ const ImageUploadForm = ({ setOpen, product }) => {
 
         // get public URL
         const { data } = supabase.storage
-            .from("products")
+            .from("products-images")
             .getPublicUrl(fileName);
 
         const imageUrl = data.publicUrl;
