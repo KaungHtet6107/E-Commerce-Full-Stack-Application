@@ -81,7 +81,7 @@ public class ProductController {
     public ResponseEntity<ProductDTO> updateProductImage(@PathVariable Long productId, 
                                                          @RequestBody UpdateProductImageRequest request) {
 
-        ProductDTO updatedProduct = productService.updateProductImage(productId, request.getImageUrl());
+        ProductDTO updatedProduct = productService.updateProductImage(productId, request.getImage());
 
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
@@ -127,7 +127,7 @@ public class ProductController {
     public ResponseEntity<ProductDTO> updateProductImageSeller(@PathVariable Long productId,
                                                                @RequestBody UpdateProductImageRequest request) {
 
-        ProductDTO updatedProduct = productService.updateProductImage(productId, request.getImageUrl());
+        ProductDTO updatedProduct = productService.updateProductImage(productId, request.getImage());
 
         return new ResponseEntity<>(updatedProduct, HttpStatus.OK);
     }
