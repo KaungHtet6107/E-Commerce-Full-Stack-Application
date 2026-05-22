@@ -460,20 +460,28 @@ export const deleteProduct =
     }
 };
 
-
-export const updateProductImageFromDashboard = 
-    (formData, productId, toast, setLoader, setOpen, isAdmin) => async (dispatch) => {
+export const updateProductImageFromDashboard =
+(sendData, productId, toast, setLoader, setOpen, isAdmin) => async (dispatch) => {
     try {
         setLoader(true);
         const endpoint = isAdmin ? "/admin/products/" : "/seller/products/";
-        await api.put(`${endpoint}${productId}/image`, formData);
+        await api.put(
+            `${endpoint}${productId}/image`,
+            sendData,
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            }
+        );
         toast.success("Image upload successful");
-        setLoader(false);
         setOpen(false);
-        await dispatch(dashboardProductsAction());
+        await dispatch(dashboardProductsAction("", isAdmin));
     } catch (error) {
-        toast.error(error?.response?.data?.description || "Product Image upload failed");
-     
+        console.error(error);
+        toast.error(error?.response?.data?.message || "Product image upload failed");
+    } finally {
+        setLoader(false);
     }
 };
 
