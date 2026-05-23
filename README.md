@@ -48,7 +48,7 @@ Database: PostgreSQL
 ---
 🌐 Live Demo
 Frontend: https://sb-ecommerce-kaung-htet.netlify.app/
-Backend API: https://sb-ecom-latest-4pri.onrender.com
+Backend API: https://sb-ecom-latest-7iv7.onrender.com
 ---
 🛠️ Build & Run
 Backend
