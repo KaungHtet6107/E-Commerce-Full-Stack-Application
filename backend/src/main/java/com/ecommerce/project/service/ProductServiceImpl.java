@@ -181,11 +181,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
     private String constructImageUrl(String imageName) {
-        if (imageName.startsWith("http")) {
-            return imageName;
-        }
-        return imageBaseUrl.endsWith("/") ? imageBaseUrl + imageName : imageBaseUrl + "/" + imageName;
+
+    // fallback image
+    if (imageName == null || imageName.isBlank()) {
+        return imageBaseUrl.endsWith("/")
+                ? imageBaseUrl + "default.png"
+                : imageBaseUrl + "/default.png";
     }
+
+    // Supabase full URL
+    if (imageName.startsWith("http")) {
+        return imageName;
+    }
+
+    // Local image
+    return imageBaseUrl.endsWith("/")
+            ? imageBaseUrl + imageName
+            : imageBaseUrl + "/" + imageName;
+}
 
     @Override
     public ProductResponse searchByCategory(Long categoryId, Integer pageNumber, Integer pageSize, String sortBy, String sortOrder) {
