@@ -122,8 +122,12 @@ export const authenticateSignInUser
         try {
             setLoader(true);
             const { data } = await api.post("/auth/signin", sendData);
+            console.log(data);
             dispatch({ type: "LOGIN_USER", payload: data });
             localStorage.setItem("auth", JSON.stringify(data));
+            const rawToken = data.jwtToken;
+            const cleanToken = rawToken?.split(";")[0]?.split("=")[1] || rawToken;
+            localStorage.setItem("token", cleanToken);
             reset();
             toast.success("Login Success");
             navigate("/");
