@@ -38,11 +38,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
+                System.out.println("JWT USERNAME: " + username);
+                System.out.println("AUTHORITIES: " + userDetails.getAuthorities());
+
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails,
                                 null,
                                 userDetails.getAuthorities());
-                logger.debug("Roles from JWT: {}", userDetails.getAuthorities());
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
