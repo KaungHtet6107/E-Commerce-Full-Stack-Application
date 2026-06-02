@@ -68,9 +68,7 @@ const ImageUploadForm = ({ setOpen, product }) => {
         // send URL to backend
         dispatch(
             updateProductImageFromDashboard(
-                {
-                    image
-                },
+                { image: image },
                 product.id,
                 toast,
                 setLoader,
