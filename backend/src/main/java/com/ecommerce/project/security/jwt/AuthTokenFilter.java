@@ -30,16 +30,23 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        logger.debug("AuthTokenFilter called for URI: {}", request.getRequestURI());
+        System.out.println("REQUEST URI = " + request.getRequestURI());
         try {
             String jwt = parseJwt(request);
-            if (jwt != null && SecurityContextHolder.getContext().getAuthentication() == null && jwtUtils.validateJwtToken(jwt)) {
+            if (jwt != null
+                    && SecurityContextHolder.getContext().getAuthentication() == null
+                    && jwtUtils.validateJwtToken(jwt)) {
+
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                System.out.println("JWT TOKEN FOUND");
+                System.out.println("JWT USERNAME = " + username);
 
-                System.out.println("JWT USERNAME: " + username);
-                System.out.println("AUTHORITIES: " + userDetails.getAuthorities());
+                UserDetails userDetails =
+                        userDetailsService.loadUserByUsername(username);
+
+                System.out.println("USER FOUND = " + userDetails.getUsername());
+                System.out.println("AUTHORITIES = " + userDetails.getAuthorities());
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails,
@@ -52,7 +59,8 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 System.out.println("FINAL AUTHORITIES: " + SecurityContextHolder.getContext().getAuthentication().getAuthorities());
             }
         } catch (Exception e) {
-            logger.error("Cannot set user authentication: {}", e);
+            e.printStackTrace(); 
+            logger.error("Cannot set user authentication: {}", e.getMessage());
         }
 
         filterChain.doFilter(request, response);
